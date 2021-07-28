@@ -1,5 +1,8 @@
-const fs = require(`fs`);
 const inquirer = require(`inquirer`);
+
+const { writeFile, copyFile } = require(`./utils/generate-site.js`);
+
+const generatePage = require(`./src/page-template.js`);
 
 const promptInput = () => {
     return inquirer
@@ -202,3 +205,17 @@ const promptToAdd = () => {
 
 promptInput()
     .then(promptToAdd)
+    .then(teamData => {
+        return generatePage(teamData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    // possibly add or rearrange some of this?
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .catch(err => {
+        console.log(err);
+    });

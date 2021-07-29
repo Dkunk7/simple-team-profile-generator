@@ -62,8 +62,8 @@ const promptInput = () => {
         ])
 }
 
-const addEngineer = () => {
-    inquirer
+const addEngineer = (teamData) => {
+    return inquirer
         .prompt([
             {
                 type: `input`,
@@ -116,12 +116,18 @@ const addEngineer = () => {
                         return false;
                     }
                 }
-            },
-        ]).then(promptToAdd)
+            }
+        ]).then(employeeData => {
+            // console.log(employeeData);
+            // console.log(teamData);
+            teamData.list.push(employeeData);
+            // console.log(teamData);
+            return promptToAdd(teamData);
+        })//.then(promptToAdd(teamData)) <-- This was causing promptToAdd to run every time a question is asked from this point onward.
 }
 
-const addIntern = () => {
-    inquirer
+const addIntern = teamData => {
+    return inquirer
         .prompt([
             {
                 type: `input`,
@@ -175,10 +181,18 @@ const addIntern = () => {
                     }
                 }
             },
-        ]).then(promptToAdd)
+        ]).then(employeeData => {
+            teamData.list.push(employeeData);
+            return promptToAdd(teamData);
+        })
+           
+        
 }
-const promptToAdd = () => {
-    inquirer
+const promptToAdd = teamData => {
+    if (!teamData.list) {
+        teamData.list = [];
+    }
+    return inquirer
         .prompt([
             {
                 type: `list`,
@@ -194,28 +208,29 @@ const promptToAdd = () => {
                     }
                 }
             },
-        ]).then(choice => {
-            if (choice.choice === `Add an engineer`) {
-                return addEngineer();
-            } else if (choice.choice === `Add an intern`) {
-                return addIntern();
+        ]).then(response => {
+            if (response.choice === `Add an engineer`) {
+                return addEngineer(teamData);
+            } else if (response.choice === `Add an intern`) {
+                return addIntern(teamData);
             }
+            console.log(teamData);
         })
 }
 
 promptInput()
     .then(promptToAdd)
-    .then(teamData => {
-        return generatePage(teamData);
-    })
-    .then(pageHTML => {
-        return writeFile(pageHTML);
-    })
-    // possibly add or rearrange some of this?
-    .then(writeFileResponse => {
-        console.log(writeFileResponse);
-        return copyFile();
-    })
-    .catch(err => {
-        console.log(err);
-    });
+    // .then(teamData => {
+    //     return generatePage(teamData);
+    // })
+    // .then(pageHTML => {
+    //     return writeFile(pageHTML);
+    // })
+    // // possibly add or rearrange some of this?
+    // .then(writeFileResponse => {
+    //     console.log(writeFileResponse);
+    //     return copyFile();
+    // })
+    // .catch(err => {
+    //     console.log(err);
+    // });

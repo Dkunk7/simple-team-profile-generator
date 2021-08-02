@@ -218,22 +218,23 @@ const promptToAdd = teamData => {
                 return addIntern(teamData);
             }
             console.log(teamData);
+            return teamData;
         })
 }
 
 promptInput()
     .then(promptToAdd)
-    // .then(teamData => {
-    //     return generatePage(teamData);
-    // })
-    // .then(pageHTML => {
-    //     return writeFile(pageHTML);
-    // })
-    // // possibly add or rearrange some of this?
-    // .then(writeFileResponse => {
-    //     console.log(writeFileResponse);
-    //     return copyFile();
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    // });
+    .then(teamData => {
+        return generatePage(teamData);
+    })
+    .then(pageHTML => {
+        return writeFile(pageHTML);
+    })
+    // possibly add or rearrange some of this?
+    .then(writeFileResponse => {
+        console.log(writeFileResponse);
+        return copyFile();
+    })
+    .catch(err => {
+        console.log(err);
+    });

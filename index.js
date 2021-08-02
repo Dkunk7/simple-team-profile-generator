@@ -9,7 +9,7 @@ const promptInput = () => {
         .prompt([
             {
                 type: `input`,
-                name: `managerName`,
+                name: `name`,
                 message: `Enter the name of the team manager:`,
                 validate: input => {
                     if (input) {
@@ -22,7 +22,7 @@ const promptInput = () => {
             },
             {
                 type: `input`,
-                name: `managerID`,
+                name: `id`,
                 message: `Enter the manager's employee ID:`,
                 validate: input => {
                     if (input) {
@@ -35,7 +35,7 @@ const promptInput = () => {
             },
             {
                 type: `input`,
-                name: `managerEmail`,
+                name: `email`,
                 message: `Enter the email of the team manager:`,
                 validate: input => {
                     if (input) {
@@ -67,7 +67,7 @@ const addEngineer = (teamData) => {
         .prompt([
             {
                 type: `input`,
-                name: `engineerName`,
+                name: `name`,
                 message: `Enter the name of the engineer`,
                 validate: input => {
                     if (input) {
@@ -80,7 +80,7 @@ const addEngineer = (teamData) => {
             },
             {
                 type: `input`,
-                name: `engineerID`,
+                name: `id`,
                 message: `Enter the employee ID of the engineer`,
                 validate: input => {
                     if (input) {
@@ -93,7 +93,7 @@ const addEngineer = (teamData) => {
             },
             {
                 type: `input`,
-                name: `engineerEmail`,
+                name: `email`,
                 message: `Enter the email of the engineer`,
                 validate: input => {
                     if (input) {
@@ -106,7 +106,7 @@ const addEngineer = (teamData) => {
             },
             {
                 type: `input`,
-                name: `engineerGitHub`,
+                name: `github`,
                 message: `Enter the GitHub username of the engineer`,
                 validate: input => {
                     if (input) {
@@ -120,7 +120,7 @@ const addEngineer = (teamData) => {
         ]).then(employeeData => {
             // console.log(employeeData);
             // console.log(teamData);
-            teamData.list.push(employeeData);
+            teamData.engineerList.push(employeeData);
             // console.log(teamData);
             return promptToAdd(teamData);
         })//.then(promptToAdd(teamData)) <-- This was causing promptToAdd to run every time a question is asked from this point onward.
@@ -131,7 +131,7 @@ const addIntern = teamData => {
         .prompt([
             {
                 type: `input`,
-                name: `internName`,
+                name: `name`,
                 message: `Enter the name of the intern`,
                 validate: input => {
                     if (input) {
@@ -144,7 +144,7 @@ const addIntern = teamData => {
             },
             {
                 type: `input`,
-                name: `internID`,
+                name: `id`,
                 message: `Enter the ID of the intern`,
                 validate: input => {
                     if (input) {
@@ -157,7 +157,7 @@ const addIntern = teamData => {
             },
             {
                 type: `input`,
-                name: `internEmail`,
+                name: `email`,
                 message: `Enter the email of the intern`,
                 validate: input => {
                     if (input) {
@@ -182,15 +182,18 @@ const addIntern = teamData => {
                 }
             },
         ]).then(employeeData => {
-            teamData.list.push(employeeData);
+            teamData.internList.push(employeeData);
             return promptToAdd(teamData);
         })
            
         
 }
 const promptToAdd = teamData => {
-    if (!teamData.list) {
-        teamData.list = [];
+    if (!teamData.internList) {
+        teamData.internList = [];
+    }
+    if (!teamData.engineerList) {
+        teamData.engineerList = [];
     }
     return inquirer
         .prompt([

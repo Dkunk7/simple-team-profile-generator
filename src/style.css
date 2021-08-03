@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+.banner {
+    background-color:rgb(45, 145, 240);
+    color:rgb(244, 247, 250);
+}
+
+.card-header {
+    background-color: rgb(137, 194, 241);
+}
+
+.card-body {
+    background-color: rgb(221, 235, 247);
+}

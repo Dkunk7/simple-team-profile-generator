@@ -18,6 +18,9 @@
 
   ## Usage
   Enter `node index` into the terminal to initiate the application. Follow the prompts until you finish. The resulting `index.html` and `style.css` pages will be generated in the `dist` directory.
+
+  Here's a short <a href = "https://drive.google.com/file/d/1u77x1uOxUhoadE7Z04Ntgq0kQ9A0lw7M/view" target = "_blank">video</a> showing the app being used as well as successful testing!
+  
   
 
   

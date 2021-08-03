@@ -230,7 +230,6 @@ promptInput()
     .then(pageHTML => {
         return writeFile(pageHTML);
     })
-    // possibly add or rearrange some of this?
     .then(writeFileResponse => {
         console.log(writeFileResponse);
         return copyFile();
